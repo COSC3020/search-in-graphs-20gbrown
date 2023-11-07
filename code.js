@@ -28,7 +28,7 @@ function depthFirstSearch(graph, startNode, targetNode) {
   }
 }
 
-/*const adjacencyList = {
+const adjacencyList = {
     A: ["B", "C"],
     B: ["D", "E"],
     C: ["F"],
@@ -38,7 +38,7 @@ function depthFirstSearch(graph, startNode, targetNode) {
     G: [],
   };
   
-  const startNode = "A";
+ /*const startNode = "A";
   const targetNode = "F";
   const path = depthFirstSearch(adjacencyList, startNode, targetNode);
 */

@@ -3,36 +3,25 @@ const jsc = require('jsverify');
 
 eval(fs.readFileSync('code.js') + '');
 
-const test = jsc.forall('array string', function (graphData) {
-  // Convert graph data to an adjacency list
-  /*const adjacencyList = {};
+const graphDataGenerator = jsc.record({
+  A: jsc.array(jsc.elements(['B', 'C', 'D', 'E', 'F', 'G'])),
+  B: jsc.array(jsc.elements(['A', 'C', 'D', 'E', 'F', 'G'])),
+  C: jsc.array(jsc.elements(['A', 'B', 'D', 'E', 'F', 'G'])),
+  D: jsc.array(jsc.elements(['A', 'B', 'C', 'E', 'F', 'G'])),
+  E: jsc.array(jsc.elements(['A', 'B', 'C', 'D', 'F', 'G'])),
+  F: jsc.array(jsc.elements(['A', 'B', 'C', 'D', 'E', 'G'])),
+  G: jsc.array(jsc.elements(['A', 'B', 'C', 'D', 'E', 'F'])),
+});
 
-  // Populate the adjacency list based on the graph data
-  for (const edge of graphData) {
-    const [from, to] = edge.split('->');
-    if (!adjacencyList[from]) {
-      adjacencyList[from] = [];
-    }
-    adjacencyList[from].push(to);
-  }*/
-
-  if (typeof graphData !== 'object') {
-    return true; // Skip non-graph inputs
-  }
-
-  // Define start and target nodes
+const test = jsc.forall(graphDataGenerator, function (graphData) {
   const startNode = 'A';
   const targetNode = 'F';
-
-  // Run the DFS algorithm
+  
   const path = depthFirstSearch(graphData, startNode, targetNode);
 
-  // Check if a path was found
   if (path) {
-    // Verify if the path is valid
     return path[0] === startNode && path[path.length - 1] === targetNode;
   } else {
-    // If no path was found, return true
     return true;
   }
 });
