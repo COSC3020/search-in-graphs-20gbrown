@@ -28,15 +28,6 @@ function depthFirstSearch(graph, startNode, targetNode) {
   }
 }
 
-const adjacencyList = {
-    A: ["B", "C"],
-    B: ["D", "E"],
-    C: ["F"],
-    D: [],
-    E: ["F"],
-    F: ["G"],
-    G: [],
-  };
   
  /*const startNode = "A";
   const targetNode = "F";

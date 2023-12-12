@@ -3,6 +3,16 @@ const jsc = require('jsverify');
 
 eval(fs.readFileSync('code.js') + '');
 
+const adjacencyList = {
+  A: ["B", "C"],
+  B: ["D", "E"],
+  C: ["F"],
+  D: [],
+  E: ["F"],
+  F: ["G"],
+  G: [],
+};
+
 const graphDataGenerator = jsc.record({
   A: jsc.array(jsc.elements(['B', 'C', 'D', 'E', 'F', 'G'])),
   B: jsc.array(jsc.elements(['A', 'C', 'D', 'E', 'F', 'G'])),
